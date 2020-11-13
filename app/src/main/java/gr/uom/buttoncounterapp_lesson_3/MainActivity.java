@@ -13,10 +13,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     private static final String LOG_TAG="Teo";
+    public static final String TEXT_CONTENTS = "MainActivity_textView";
+    private static int numTimesClicked=0;
+
+
     private Button button;
     private TextView textView;
 
-    private int numTimesClicked=0;
 
 
 
@@ -85,14 +88,20 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
         Log.d("TAG","OnSaveInstanceState");
+        outState.putString(TEXT_CONTENTS, textView.getText().toString());
+        super.onSaveInstanceState(outState);
+
     }
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         Log.d("TAG","OnRestoreInstanceState");
+
+        String savedText=savedInstanceState.getString(TEXT_CONTENTS);
+        textView.setText(savedText);
+
     }
 
 
